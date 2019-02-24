@@ -1,0 +1,24 @@
+{
+  "name": "hamazon",
+  "version": "1.0.0",
+  "description": "Amazon-like storefront node cli app using MySQL.",
+  "main": "hamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ma662/Hamazon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ma662/Hamazon/issues"
+  },
+  "homepage": "https://github.com/ma662/Hamazon#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^6.2.2",
+    "mysql": "^2.16.0"
+  }
+}
