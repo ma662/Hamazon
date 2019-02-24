@@ -74,7 +74,7 @@ var app = {
         connection.query("SELECT * FROM products WHERE `stock_quantity` < ?",
         [ 10 ],
         function (err, res) {
-            console.log(res);
+            // console.log(res);
             for (var i=0; i<res.length; i++) {
                 // why does this format wrong open console logging ?
                 // format price
@@ -126,7 +126,7 @@ var app = {
 
         modify : function (selection) {
             var id = selection.split(' ')[0];
-            console.log(id);
+            // console.log(id);
 
             inquirer
             .prompt([
