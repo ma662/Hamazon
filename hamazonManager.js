@@ -59,7 +59,6 @@ var app = {
         connection.query("SELECT * FROM products",
         function (err, res) {
             for (var i=0; i<res.length; i++){
-                // why does this format wrong open console logging ?
                 // format price
                 res[i].price = parseFloat(Math.round(res[i].price * 100) / 100).toFixed(2);
             }
@@ -74,12 +73,9 @@ var app = {
         connection.query("SELECT * FROM products WHERE `stock_quantity` < ?",
         [ 10 ],
         function (err, res) {
-            // console.log(res);
             for (var i=0; i<res.length; i++) {
-                // why does this format wrong open console logging ?
                 // format price
                 res[i].price = parseFloat(Math.round(res[i].price * 100) / 100).toFixed(2);
-                // console.log(typeof(res[i].price));
             }
             console.log("\n");
             console.table(res);
@@ -112,8 +108,6 @@ var app = {
                     }
                 ])
                 .then(function(answer) {
-                    // console.log(answer);
-
                     if ( answer['id-sel'] === 'Back') {
                         return app.main_menu();
                     }
@@ -126,7 +120,6 @@ var app = {
 
         modify : function (selection) {
             var id = selection.split(' ')[0];
-            // console.log(id);
 
             inquirer
             .prompt([
@@ -153,7 +146,6 @@ var app = {
                 function (err, res) {
                     var sq = res[0].stock_quantity;
                     var newSq = sq + parseInt(answer.amount);
-                    // console.log(newSq);
                     
                     connection.query('UPDATE products SET stock_quantity=? WHERE ?',
                     [   
@@ -173,7 +165,7 @@ var app = {
     },
 
     addProduct : {
-        p_obj : {},
+        p_object : {},
 
         conf : function () {
             inquirer
@@ -224,7 +216,7 @@ var app = {
                         return app.main_menu();
                     }
                     // add to product object
-                    app.addProduct.p_obj.item_name = answer.name;
+                    app.addProduct.p_object.item_name = answer.name;
 
                     return app.addProduct.set_dept();
                 });
@@ -244,7 +236,7 @@ var app = {
                 }
             ])
             .then(function(answer) {
-                app.addProduct.p_obj.dept = answer.dept;
+                app.addProduct.p_object.dept = answer.dept;
                 return app.addProduct.set_price();
             });
         },
@@ -270,9 +262,8 @@ var app = {
             ])
             .then(function(answer) {
                 var price = parseFloat(Math.round(answer.price * 100) / 100).toFixed(2);
-                // console.log ("price is : " + price );
 
-                app.addProduct.p_obj.price = price;
+                app.addProduct.p_object.price = price;
                 return app.addProduct.set_sq();
             });
         },
@@ -299,30 +290,23 @@ var app = {
             .then(function(answer) {
                 var stock_quantity = answer.quantity;
 
-                app.addProduct.p_obj.stock_quantity = stock_quantity;
+                app.addProduct.p_object.stock_quantity = stock_quantity;
                 return app.addProduct.update();
             });
 
         },
 
         update : function () {
-            // WORKING HERE
             var tableArr = [];
             var newObj = {};
 
-            for (var i=0; i<Object.keys(app.addProduct.p_obj).length; i++){
-                var thisProp = Object.keys(app.addProduct.p_obj)[i];
-                // console.log(thisProp);
-
-                var thisVal = app.addProduct.p_obj[Object.keys(app.addProduct.p_obj)[i]];
-                // console.log(thisVal);
+            for (var i=0; i<Object.keys(app.addProduct.p_object).length; i++){
+                var thisProp = Object.keys(app.addProduct.p_object)[i];
+                var thisVal = app.addProduct.p_object[Object.keys(app.addProduct.p_object)[i]];
                 
                 newObj[thisProp] = thisVal;
             }
-            // console.log(newObj);
-
             tableArr.push(newObj);
-
             console.table("\ninformation", tableArr);
 
             inquirer
@@ -338,17 +322,16 @@ var app = {
                     connection.query("INSERT INTO products SET ?",
                     [
                         {
-                            product_name: app.addProduct.p_obj.item_name,
-                            department_name: app.addProduct.p_obj.dept,
-                            price: app.addProduct.p_obj.price,
-                            stock_quantity: app.addProduct.p_obj.stock_quantity
+                            product_name: app.addProduct.p_object.item_name,
+                            department_name: app.addProduct.p_object.dept,
+                            price: app.addProduct.p_object.price,
+                            stock_quantity: app.addProduct.p_object.stock_quantity
                         }
                     ],
                     function (err, res) {
                         if (err) throw (err);
 
                         console.log(res.affectedRows + " item updated!\n");
-                        
                         return app.main_menu();
                     });
 
