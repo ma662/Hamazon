@@ -62,7 +62,6 @@ var app = {
                 // why does this format wrong open console logging ?
                 // format price
                 res[i].price = parseFloat(Math.round(res[i].price * 100) / 100).toFixed(2);
-                // console.log(typeof(res[i].price));
             }
             console.log("\n");
             console.table(res);
@@ -73,8 +72,7 @@ var app = {
 
     displayLow : function () {
         connection.query("SELECT * FROM products WHERE `stock_quantity` < ?",
-        [ 10 ]
-        ,
+        [ 10 ],
         function (err, res) {
             console.log(res);
             for (var i=0; i<res.length; i++) {
@@ -202,7 +200,14 @@ var app = {
                 {
                     name: "name",
                     type: "input",
-                    message: "Enter Product Name: "
+                    message: "Enter Product Name: ",
+                    validate: function(value) {
+                        if (value.length === 0) {
+                            console.log("Invalid input.");
+                            return false;
+                        }
+                        return true;
+                    }
                 }
             ])
             .then(function(answer) {
@@ -235,7 +240,7 @@ var app = {
                     name: "dept",
                     type: "list",
                     message: "Select a Department Name: ",
-                    choices: ["Foods", "Toys", "Kids", "Electronics", "Home", "Shoes", "Accessories", "Clothing"]
+                    choices: ["Foods", "Home", "Toys", "Kids", "Electronics", "Shoes", "Clothing"]
                 }
             ])
             .then(function(answer) {
@@ -299,6 +304,7 @@ var app = {
             });
 
         },
+
         update : function () {
             // WORKING HERE
             var tableArr = [];
