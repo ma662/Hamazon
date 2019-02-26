@@ -53,7 +53,7 @@ var app = {
             function (err, res) {
                 for (var i = 0; i < res.length; i++) {
                     // format price
-                    res[i].price = parseFloat(Math.round(res[i].price * 100) / 100).toFixed(2);
+                    res[i].price = "$ " + parseFloat(Math.round(res[i].price * 100) / 100).toFixed(2);
                 }
                 console.log("\n");
                 console.table(res);
