@@ -28,6 +28,7 @@ Hamazon Manager allows you to:
 - add a new product to the list
 
 ## Technologies:
-- MySQL
 - Node.js
-- 
+- MySQL
+- JavaScript
+- Inquirer.js
