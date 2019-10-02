@@ -1,7 +1,9 @@
 # Hamazon
-Amazon-like storefront node cli app using MySQL.
+Amazon-inspired commandline interface storefront app built with node MySQL.
 
-Initialize with
+![](hamazon_demo.gif)
+
+Installation:
 ```
 npm install
 ```
@@ -24,3 +26,8 @@ Hamazon Manager allows you to:
 - display low quantity list items
 - add stock to any product
 - add a new product to the list
+
+## Technologies:
+- MySQL
+- Node.js
+- 
