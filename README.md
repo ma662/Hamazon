@@ -1,5 +1,5 @@
 # Hamazon
-Amazon-inspired commandline interface storefront app built with node MySQL. The customer application allows for purchasing of items. The manager application deals with managing and adding products.
+Amazon-inspired and Ham themed commandline interface storefront app built with node MySQL. The customer application allows for purchasing of items. The manager application deals with managing and adding products.
 
 ![](hamazon_demo.gif)
 
